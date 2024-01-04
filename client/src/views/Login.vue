@@ -10,8 +10,10 @@
                 </n-form-item>
             </n-form>
             <template #footer>
-                <n-checkbox v-model:checked="admin.rember" label="记住我" />
-                <n-button @click="login">登录</n-button>
+                <div class="login-btn">
+                    <n-checkbox v-model:checked="admin.rember" label="记住我" />
+                    <n-button @click="login" type="primary">登录</n-button>
+                </div>
             </template>
 
         </n-card>
@@ -21,10 +23,13 @@
 <script setup>
 import { reactive, ref, inject } from 'vue'
 import { AdminStore } from "../store/AdminStore.js"
+import { useRouter, useRoute } from  'vue-router'
 
 const message = inject("message")
 const axios = inject("axios")
 const adminStore = AdminStore()
+const router = useRouter()
+const route = useRoute()
 
 let rules = {
     account: [
@@ -38,9 +43,9 @@ let rules = {
 }
 
 const admin = reactive({
-    account: '',
-    password: '',
-    rember: false,
+    account: localStorage.getItem('account') || "",
+    password: localStorage.getItem('password') || "",
+    rember: localStorage.getItem('rember') == 1 || false,
 })
 
 const login = async () => {
@@ -53,7 +58,15 @@ const login = async () => {
         adminStore.id = res.data.data.id
         adminStore.account = res.data.data.account
         adminStore.token = res.data.data.token
+
+        if (admin.rember) {
+            localStorage.setItem("account", admin.account)
+            localStorage.setItem("password", admin.password)
+            localStorage.setItem("rember", admin.rember ? 1 : 0)
+        }
+
         message.success("登录成功")
+        router.push("/dashboard")
     } else {
         message.error("用户名或密码错误")
     }
@@ -67,6 +80,11 @@ const login = async () => {
         width: 500px;
         margin: 0 auto;
         margin-top: 130px;
+        .login-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 
 </style>
