@@ -9,10 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.3.11"
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "axios": "^1.6.3",
+    "pinia": "^2.1.7",
+    "sass": "^1.69.7",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "naive-ui": "^2.36.0",
+    "vfonts": "^0.0.3",
     "vite": "^5.0.8"
   }
 }
