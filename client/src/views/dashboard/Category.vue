@@ -1,5 +1,5 @@
 <template>
-  <n-button type="primary" @click="showModal = true">新增分类</n-button>
+  <n-button style="margin-bottom: 20px;" type="primary" @click="showModal = true">新增分类</n-button>
   
   <n-space vertical>
     <n-table striped>
