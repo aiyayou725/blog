@@ -2,6 +2,23 @@ const express = require("express")
 const router = express.Router()
 const { db, genid } = require("../db/DbUtils")
 
+router.get('/detail', async (req, res) => {
+    let { id } = req.query
+    let { err, rows } = await db.async.all("SELECT * FROM `blog` WHERE `id` = ? ", [id])
+    if (err == null) {
+        res.send({
+            code: 200,
+            msg: "获取文章成功",
+            data: rows
+        })
+    } else {
+        res.send({
+            code: 500,
+            msg: "获取文章失败"
+        })
+    }
+})
+
 // 根据关键字或分类，分页，页码信息查询文章
 router.get("/search", async (req, res) => {
     /**
