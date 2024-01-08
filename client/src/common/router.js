@@ -1,10 +1,18 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 
 let routes = [
-    { path: "/", component: () => import("../views/HomePage.vue")},
-    { path: "/test", component: () => import("../views/test.vue")},
+    { path: "/",
+      redirect: "/home",
+      component: () => import("../views/HomePage.vue"),
+      children: [
+        { path: "/home", component: () => import("../views/blogs/Home.vue")},
+        { path: "/blog", component: () => import("../views/blogs/Blog.vue")},
+      ]
+    },
+    { path: "/detail", component: () => import("../views/blogs/Detail.vue")},
     { path: "/login", component: () => import("../views/Login.vue")},
     { path: "/dashboard", 
+      redirect: "/dashboard/article",
       component: () => import("../views/dashboard/DashBoard.vue"),
       children: [
         { path: "/dashboard/article", component: () => import("../views/dashboard/Article.vue")},
