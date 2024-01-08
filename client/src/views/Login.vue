@@ -64,9 +64,8 @@ const login = async () => {
             localStorage.setItem("password", admin.password)
             localStorage.setItem("rember", admin.rember ? 1 : 0)
         }
-
         message.success("登录成功")
-        router.push("/dashboard")
+        router.push("/dashboard/article")
     } else {
         message.error("用户名或密码错误")
     }

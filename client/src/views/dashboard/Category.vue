@@ -1,5 +1,5 @@
 <template>
-  <n-button style="margin-bottom: 20px;" type="primary" @click="showModal = true">新增分类</n-button>
+  <n-button strong secondary style="margin-bottom: 20px;" type="primary" @click="showModal = true">新增分类</n-button>
   
   <n-space vertical>
     <n-table striped>
@@ -16,8 +16,8 @@
           <td>{{ category.name }}</td>
           <td>
             <n-space>
-              <n-button type="info" @click="editCategory(category)">编辑</n-button>
-              <n-button type="error" @click="deleteCategory(category)">删除</n-button>
+              <n-button strong secondary type="info" @click="editCategory(category)">编辑</n-button>
+              <n-button strong secondary type="error" @click="deleteCategory(category)">删除</n-button>
             </n-space>
           </td>
         </tr>

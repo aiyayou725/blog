@@ -1,28 +1,35 @@
 <template>
-  <div class="main-panel">
-    <div class="menus">
-      <div v-for="(menu, index) in menus" @click="toPage(menu)">{{ menu.name }}</div>
-    </div>
-    <div style="padding: 20px; width: 100%;">
-      <router-view></router-view>
-    </div>
-  </div>
+   <n-layout has-sider>
+      <n-layout-sider
+        collapse-mode="transform"
+        :collapsed-width="120"
+        :width="240"
+        show-trigger="arrow-circle"
+        content-style="padding: 24px;"
+        bordered
+      >
+        <div class="menus">
+          <div v-for="(menu, index) in menus" @click="toPage(menu)">{{ menu.name }}</div>
+        </div>
+      </n-layout-sider>
+      <n-layout-content content-style="padding: 24px;">
+        <router-view></router-view>
+      </n-layout-content>
+    </n-layout>
+
   <div class="title">后台管理系统</div>
 </template>
 
 <script setup>
-import { AdminStore } from '../../store/AdminStore'
-import { reactive, ref, inject } from 'vue' 
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
 const router = useRouter()
-const axios = inject("axios")
-const store = AdminStore()
 
 let menus = [
   { name: "文章管理", href: "/dashboard/article" },
   { name: "分类管理", href: "/dashboard/category" },
+  { name: "返回前台", href: "/" },
   { name: "退出", href: "logout" },
 ]
 
@@ -37,25 +44,16 @@ const toPage = (menu) => {
 </script>
 
 <style lang="scss" scoped>
-.main-panel {
-  display: flex;
-  color: #64676a;
-  max-width: 1500px;
-  margin: 0 auto;
-  .menus {
-    padding: 20px 0;
-    box-sizing: border-box;
-    line-height: 55px;
-    text-align: center;
-    width: 180px;
-    height: 95vh;
-    border-right: 1px solid #dadada;
-
-    div {
-      cursor: pointer;
-      &:hover {
-        color: #18a058;
-      }
+.menus {
+  box-sizing: border-box;
+  line-height: 55px;
+  text-align: center;
+  width: 180px;
+  height: 95vh;
+  div {
+    cursor: pointer;
+    &:hover {
+      color: #18a058;
     }
   }
 }
